@@ -1,10 +1,6 @@
-/******************************************************
- * STARFIELD + TEXT FORMATION
- *****************************************************/
 const canvas = document.getElementById('starCanvas');
 const ctx = canvas.getContext('2d');
 
-// Resize the canvas
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -14,14 +10,12 @@ resizeCanvas();
 let stars = [];
 let textPositions = [];
 
-// CONFIG
-const NUM_STARS = 1000;
-const STAR_RADIUS = 0.8;
+const NUM_STARS = 800;
+const STAR_RADIUS = 1;
 const MOUSE_REPEL_RADIUS = 100;
 const REPEL_FORCE = 8;
 const FORMATION_SPEED = 0.01;
 
-// Initialize random stars
 function initStars() {
   stars = [];
   for (let i = 0; i < NUM_STARS; i++) {
@@ -34,7 +28,6 @@ function initStars() {
   }
 }
 
-// Generate text positions for "LOREM IPSUM"
 function generateTextPositions() {
   const offCanvas = document.createElement('canvas');
   const offCtx = offCanvas.getContext('2d');
@@ -63,7 +56,6 @@ function generateTextPositions() {
   }
 }
 
-// Assign random text positions to stars
 function assignTargets() {
   if (textPositions.length === 0) return;
   for (let i = 0; i < stars.length; i++) {
@@ -73,7 +65,6 @@ function assignTargets() {
   }
 }
 
-// Mouse
 let mouse = { x: -9999, y: -9999 };
 
 canvas.addEventListener('mousemove', (e) => {
@@ -82,14 +73,12 @@ canvas.addEventListener('mousemove', (e) => {
   mouse.y = e.clientY - rect.top;
 });
 
-// Animate
 function animateStars() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   for (let i = 0; i < stars.length; i++) {
     let s = stars[i];
 
-    // Repel from mouse
     let dx = s.x - mouse.x;
     let dy = s.y - mouse.y;
     let dist = Math.sqrt(dx * dx + dy * dy);
@@ -99,11 +88,9 @@ function animateStars() {
       s.y += (dy / dist) * force * REPEL_FORCE;
     }
 
-    // Move towards text target
     s.x += (s.tx - s.x) * FORMATION_SPEED;
     s.y += (s.ty - s.y) * FORMATION_SPEED;
 
-    // Draw star
     ctx.beginPath();
     ctx.arc(s.x, s.y, STAR_RADIUS, 0, Math.PI * 2, false);
     ctx.fillStyle = '#fff';
@@ -113,7 +100,6 @@ function animateStars() {
   requestAnimationFrame(animateStars);
 }
 
-// On load
 window.addEventListener('load', () => {
   initStars();
   generateTextPositions();
@@ -121,32 +107,25 @@ window.addEventListener('load', () => {
   animateStars();
 });
 
-// On resize => recalc canvas & text positions => reassign star targets
 window.addEventListener('resize', () => {
   resizeCanvas();
   generateTextPositions();
   assignTargets();
 });
 
-/******************************************************
- * SCROLL-BASED SECTION ANIMATIONS
- *****************************************************/
 const sections = document.querySelectorAll('.content-block');
 
 function handleScrollAnimations() {
-  // We'll say it's "in view" if top < 80% of the viewport
   const triggerBottom = window.innerHeight * 0.8;
 
   sections.forEach((section) => {
     const rect = section.getBoundingClientRect();
     if (rect.top < triggerBottom) {
-      // Remove the .section-hidden, add .section-in-view
       section.classList.remove('section-hidden');
       section.classList.add('section-in-view');
     }
   });
 }
 
-// Listen for scroll, run once on load too
 window.addEventListener('scroll', handleScrollAnimations);
 handleScrollAnimations();
