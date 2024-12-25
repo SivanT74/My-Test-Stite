@@ -16,6 +16,10 @@ const MOUSE_REPEL_RADIUS = 100;
 const REPEL_FORCE = 8;
 const FORMATION_SPEED = 0.01;
 
+function getResponsiveFontSize() {
+  return window.innerWidth < 768 ? 120 : 150;
+}
+
 function initStars() {
   stars = [];
   for (let i = 0; i < NUM_STARS; i++) {
@@ -34,8 +38,10 @@ function generateTextPositions() {
   offCanvas.width = canvas.width;
   offCanvas.height = canvas.height;
 
+  const fontSize = getResponsiveFontSize();
+
   offCtx.fillStyle = '#fff';
-  offCtx.font = 'bold 150px Arial';
+  offCtx.font = `bold ${fontSize}px Arial`;
 
   const text = 'SIVAN';
   const textWidth = offCtx.measureText(text).width;
@@ -48,7 +54,7 @@ function generateTextPositions() {
 
   for (let y = 0; y < offCanvas.height; y += 5) {
     for (let x = 0; x < offCanvas.width; x += 5) {
-      const idx = (y * offCanvas.width + x) * 4;
+      let idx = (y * offCanvas.width + x) * 4;
       if (imageData[idx + 3] > 128) {
         textPositions.push({ x, y });
       }
@@ -57,7 +63,7 @@ function generateTextPositions() {
 }
 
 function assignTargets() {
-  if (textPositions.length === 0) return;
+  if (!textPositions.length) return;
   for (let i = 0; i < stars.length; i++) {
     const randPos = textPositions[Math.floor(Math.random() * textPositions.length)];
     stars[i].tx = randPos.x;
@@ -78,10 +84,10 @@ function animateStars() {
 
   for (let i = 0; i < stars.length; i++) {
     let s = stars[i];
-
     let dx = s.x - mouse.x;
     let dy = s.y - mouse.y;
     let dist = Math.sqrt(dx * dx + dy * dy);
+
     if (dist < MOUSE_REPEL_RADIUS) {
       const force = (MOUSE_REPEL_RADIUS - dist) / MOUSE_REPEL_RADIUS;
       s.x += (dx / dist) * force * REPEL_FORCE;
