@@ -1,0 +1,161 @@
+/* RESET / BOX-SIZING */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* BODY */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #111; /* Dark background for hero */
+    color: #ddd;
+    line-height: 1.6;
+  }
+  
+  /* HERO SECTION */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #starCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Optional overlay for a darker effect */
+  .hero-overlay {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    pointer-events: none; /* so the canvas can get mouse events */
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.25rem;
+  }
+  
+  .scroll-indicator {
+    margin: 2rem auto 0;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    animation: scroll-bounce 1.5s infinite alternate;
+  }
+  
+  @keyframes scroll-bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(8px); }
+  }
+  
+  /* CONTENT CONTAINER */
+  .content-container {
+    max-width: 1500px; /* The maximum width of the page content */
+    margin: 0 auto;    /* center the container */
+    padding: 2rem;     /* some spacing on the sides */
+  }
+  
+  /* CONTENT BLOCKS */
+  .content-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;         
+    margin-bottom: 4rem;
+  }
+  
+  /* TEXT & IMAGE COLUMNS */
+  .text-col {
+    flex: 1;          
+  }
+  .img-col {
+    flex: 1;          
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Make sure images scale properly */
+  .content-block img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 2px solid #333;
+  }
+  
+  /* Layout directions */
+  .left-text-right-image {
+    flex-direction: row;
+  }
+  .right-text-left-image {
+    flex-direction: row-reverse;
+  }
+  
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #000;
+    color: #777;
+    font-size: 0.85rem;
+  }
+  
+  /* RESPONSIVE STYLES - stack on smaller screens */
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+    .content-block {
+      flex-direction: column;
+      text-align: center;
+    }
+    .left-text-right-image,
+    .right-text-left-image {
+      flex-direction: column;
+    }
+    .text-col, 
+    .img-col {
+      flex: unset;
+      width: 100%;
+    }
+  }
+  
+  /* SECTION ANIMATION STYLES */
+  
+  /* By default, each section is hidden and slightly shifted */
+  .section-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
+  /* When "in-view", fade/slide in */
+  .section-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  

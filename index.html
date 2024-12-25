@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Canvas + Alternating Sections</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- HERO SECTION with CANVAS -->
+  <section class="hero">
+    <canvas id="starCanvas"></canvas>
+  </section>
+
+  <!-- MAIN CONTENT WRAPPER (MAX WIDTH) -->
+  <div class="content-container">
+    <!-- SECTION 1: Text left, Image right -->
+    <section class="content-block left-text-right-image section-hidden">
+      <div class="text-col">
+        <h2>Section Title One</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu nisl vitae 
+          nibh dapibus bibendum. Maecenas malesuada mattis nisl vel cursus. 
+          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere 
+          cubilia curae; Fusce at dui non velit scelerisque viverra vitae ac ipsum.
+        </p>
+        <p>
+          Fusce eget risus mollis, pellentesque tellus in, tincidunt sem. Aenean 
+          finibus augue et dui commodo, vel viverra magna euismod. Nam sed porta 
+          turpis, a tincidunt metus.
+        </p>
+      </div>
+      <div class="img-col">
+        <img src="https://picsum.photos/800/500?random=1" alt="Placeholder 1" />
+      </div>
+    </section>
+
+    <!-- SECTION 2: Text right, Image left -->
+    <section class="content-block right-text-left-image section-hidden">
+      <div class="text-col">
+        <h2>Section Title Two</h2>
+        <p>
+          Nulla facilisi. Vestibulum tempor laoreet enim, eu dictum tellus malesuada 
+          at. Quisque dapibus enim at ipsum pellentesque, ac molestie libero maximus. 
+          In porta, mauris non rhoncus commodo, nulla orci facilisis nunc.
+        </p>
+        <p>
+          Pellentesque tincidunt felis ac sapien ornare, quis viverra nulla ultricies. 
+          Sed nec lacinia neque, ac auctor sapien. 
+        </p>
+      </div>
+      <div class="img-col">
+        <img src="https://picsum.photos/800/500?random=2" alt="Placeholder 2" />
+      </div>
+    </section>
+
+    <!-- SECTION 3: Text left, Image right -->
+    <section class="content-block left-text-right-image section-hidden">
+      <div class="text-col">
+        <h2>Section Title Three</h2>
+        <p>
+          Sed feugiat nisl id tortor blandit, nec luctus justo dapibus. Vestibulum 
+          ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; 
+          Cras mattis est a sapien sodales, vitae ultrices magna bibendum.
+        </p>
+        <p>
+          Maecenas maximus neque ut lacus convallis, et ultricies nibh euismod. 
+          Morbi sed odio vel lectus pretium laoreet at in lorem.
+        </p>
+      </div>
+      <div class="img-col">
+        <img src="https://picsum.photos/800/500?random=3" alt="Placeholder 3" />
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2024 Your Project</p>
+  </footer>
+
+  <!-- MAIN SCRIPT (STAR CANVAS, etc.) -->
+  <script src="js/script.js"></script>
+</body>
+</html>
